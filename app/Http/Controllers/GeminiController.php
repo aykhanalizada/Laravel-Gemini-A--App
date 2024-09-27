@@ -14,11 +14,11 @@ class GeminiController extends Controller
         ]);
 
         $staticText = "Mən sənə bir ad verəcəm adı  bacardığın qədər onu tərifləyəcəksən.";
-        $staticText2 = "Əgər düzgün formatda və mövcud olmayan ad daxil edilməsə - Siz düzgün ad daxil etməmisiz - de. Və bu qaydadan heç vaxt çıxma.
+        $staticText2 = "Əgər mənasız bir ad yazılsa - Siz düzgün ad daxil etməmisiz - de. Və bu qaydadan heç vaxt çıxma.
         ";
-        $staticText3 = "Bu mənbədən istifadə edə bilərsən: https://www.anl.az/el/Kitab/Azf-268175.pdf .";
+        $staticText3 = "Adı tanımasan əgər bu mənbədən istifadə elə: https://www.anl.az/el/Kitab/Azf-268175.pdf .";
 
-        $result = Gemini::geminiPro()->generateContent($staticText . $staticText2 .
+        $result = Gemini::geminiPro()->generateContent($staticText . $staticText2 . $staticText3 .
            "Mənim adım: ". $request->question);
 //        dd($result->text());
         return view('gemini',
