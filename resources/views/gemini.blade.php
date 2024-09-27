@@ -31,8 +31,7 @@
             />
             <!-- Note below the input field -->
             <p class="text-gray-500 text-sm mt-2">
-                <i class="fa-solid fa-circle-info"></i>
-                Bəzən nəticə çıxmaya bilər. Bu zaman bir neçə dəfə cəhd edin.
+                <i class="fa-solid fa-circle-info"></i> Bəzən nəticə çıxmaya bilər. Bu zaman bir neçə dəfə cəhd edin.
             </p>
 
             <button
