@@ -9,13 +9,23 @@
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
+
+<style>
+
+    #spinner-icon {
+        font-size: 25px;
+        margin-top: 20px;
+    }
+
+</style>
+
 <body class="bg-gray-100 h-full flex items-center justify-center">
 <div class="container mx-auto max-w-2xl">
     <!-- Input Section -->
     <form id="questionForm" action="{{route('gemini')}}" method="POST">
         @csrf
         <div class="flex flex-col items-center">
-            <h1 class="text-2xl font-bold text-gray-700 mb-4 mt-4">
+            <h1 class="text-3xl font-bold text-gray-700 mb-8 mt-4">
                 <a href="{{route('home')  }}">
                     Adınızı daxil edin
                 </a>
@@ -30,7 +40,7 @@
                    class="w-full p-3 rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <!-- Note below the input field -->
-            <p class="text-gray-500 text-sm mt-2">
+            <p class="text-gray-500 text-sm mt-2 text-left w-full">
                 <i class="fa-solid fa-circle-info"></i> Bəzən nəticə çıxmaya bilər. Bu zaman bir neçə dəfə cəhd edin.
             </p>
 
@@ -44,12 +54,15 @@
     </form>
 
     <!-- Response Section -->
-    <div id="responseDiv"
-         class="mt-8 p-6 bg-white rounded-lg shadow-md">
+    <div id="responseDiv" class="mt-8 p-6 bg-white rounded-lg shadow-md">
         <h2 class="text-xl font-semibold text-gray-800">Cavab</h2>
 
+        <div id="spinner" class="hidden justify-center items-center" >
+            <i id="spinner-icon" class="fa fa-spinner fa-spin text-blue-500"></i>
+        </div>
+
         @if(isset($answer))
-            <p id="answer" class="mt-2 text-gray-600">{{$answer}}</p>
+            <p id="answer" class="mt-2 text-gray-600">{!! $answer !!}</p>
         @endif
     </div>
 </div>
@@ -57,12 +70,20 @@
 <script>
     const form = document.getElementById('questionForm');
     const button = document.getElementById('submitBtn')
-
+    const spinner = document.getElementById('spinner');
+    const answerDiv = document.getElementById('answer');
     form.addEventListener('submit', function () {
 
         button.disabled = true;
         button.style.cursor = 'not-allowed';
         button.textContent = 'Generating...';
+
+
+        // Show the spinner and hide the answer
+        spinner.classList.remove('hidden'); // Show spinner
+        if (answerDiv) {
+            answerDiv.style.display = 'none'; // Hide the answer text
+        }
     })
 
 
